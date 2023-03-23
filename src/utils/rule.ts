@@ -85,7 +85,31 @@ export const schema = yup.object({
     .required('password là băt buột')
     .min(5, 'đô dài từ 5 - 150 ký tự')
     .max(150, 'độ dài từ 5 - 150 ký tự')
-    .oneOf([yup.ref('password')], 'nhập lại mật khẩu')
+    .oneOf([yup.ref('password')], 'nhập lại mật khẩu'),
+  price_min: yup.string().test({
+    name: 'price-not-allow',
+    message: 'Giá không phù hợp',
+    test: function (value) {
+      const price_min = value
+      const { price_max } = this.parent as { price_min: string; price_max: string }
+      if (price_min !== '' && price_max !== '') {
+        return Number(price_min) < Number(price_max)
+      }
+      return price_min !== '' || price_max !== ''
+    }
+  }),
+  price_max: yup.string().test({
+    name: 'price_max',
+    message: 'Giá không phù hợp',
+    test: function (value) {
+      const price_max = value
+      const { price_min } = this.parent as { price_min: string; price_max: string }
+      if (price_min !== '' && price_max !== '') {
+        return Number(price_min) < Number(price_max)
+      }
+      return price_min !== '' || price_max !== ''
+    }
+  })
 })
 
 // export const SchemaLogin = schema.omit(['confirm_password'])

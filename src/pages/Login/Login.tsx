@@ -11,7 +11,7 @@ import { schema, Schema } from '../../utils/rule'
 import path from 'src/constants/path'
 
 type FormData = Pick<Schema, 'email' | 'password'>
-const loginSchema = schema.omit(['confirm_password'])
+const loginSchema = schema.pick(['email', 'password'])
 
 export default function Login() {
   const navigate = useNavigate()

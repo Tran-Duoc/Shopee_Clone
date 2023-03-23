@@ -13,7 +13,6 @@ const range = 2
 
 export default function Paginate({ queryConfig, pageSize }: Props) {
   const page = Number(queryConfig.page)
-  console.log(pageSize)
 
   const renderPagination = () => {
     let dotAfter = false
